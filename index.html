@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="AI Image Studio - Imagine, create and download AI artwork.">
+<title>AI Image Studio</title>
+<style>
+:root{--bg:#070916;--panel:#11152a;--panel2:#191e38;--purple:#8b35ff;--pink:#d34cff;--text:#f7f5ff;--muted:#b9b8d2;--line:#303252;--green:#13d98b}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 78% 12%,#29104b 0,transparent 32%),var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,Segoe UI,Arial,sans-serif}
+a{color:inherit;text-decoration:none}button,input{font:inherit}.wrap{width:min(1180px,92%);margin:auto}
+header{position:sticky;top:0;z-index:5;background:#080a18ed;backdrop-filter:blur(14px);border-bottom:1px solid #252744}
+.nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{display:flex;align-items:center;gap:11px;font-size:22px;font-weight:850;letter-spacing:-.7px}.logo{width:43px;height:43px;border-radius:14px;background:linear-gradient(135deg,#9b37ff,#5526e8);display:grid;place-items:center;font-size:23px;box-shadow:0 0 24px #8b35ff66}
+.brand small{display:block;color:var(--muted);font-size:11px;font-weight:500;letter-spacing:.4px}.links{display:flex;gap:27px;color:#e4e1f4;font-size:14px}.links a:hover{color:#d99cff}.btn{border:0;border-radius:999px;padding:12px 20px;color:white;background:linear-gradient(100deg,#7a2dff,#b82fff);font-weight:750;cursor:pointer;box-shadow:0 5px 22px #852bff55;transition:.2s}.btn:hover{transform:translateY(-2px);filter:brightness(1.12)}.btn.secondary{background:#202442;border:1px solid #45466e;box-shadow:none}.menu{display:none}
+.hero{padding:64px 0 50px;display:grid;grid-template-columns:1.08fr .92fr;align-items:center;gap:35px;min-height:480px}.pill{display:inline-flex;align-items:center;gap:8px;background:#063a2b;color:#55f0b5;border:1px solid #0e9f70;border-radius:99px;padding:7px 14px;font-size:13px;font-weight:700}
+h1{font-size:clamp(42px,5.5vw,68px);line-height:1.02;letter-spacing:-2.8px;margin:20px 0 15px}h1 span{background:linear-gradient(90deg,#d8a2ff,#8c43ff);color:transparent;background-clip:text}.lead{font-size:21px;line-height:1.45;color:#c9c8df;max-width:600px;margin:0 0 26px}
+.promptbox{display:flex;gap:8px;padding:8px;background:#171a31;border:1px solid #a75aff;border-radius:17px;box-shadow:0 0 26px #7f31ff25}.promptbox input{min-width:0;flex:1;background:transparent;border:0;outline:0;color:white;padding:0 12px;font-size:14px}.promptbox input::placeholder{color:#aaa8c6}.promptbox .btn{white-space:nowrap;border-radius:12px}.hint{font-size:13px;color:#c8c4de;margin:16px 0 0 8px}.art{min-height:350px;position:relative;display:grid;place-items:center}.orb{width:min(340px,75vw);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 40% 35%,#e9baff 0,#a13eff 22%,#5115a9 48%,#160b39 72%);box-shadow:0 0 80px #922cff88, inset -22px -25px 55px #070916aa;position:relative;overflow:hidden}.orb:before{content:"✦";position:absolute;top:15%;left:25%;font-size:65px;color:#fff8;text-shadow:0 0 25px white}.orb:after{content:"AI";position:absolute;inset:0;display:grid;place-items:center;font-size:115px;font-weight:950;color:#fff9;text-shadow:0 4px 25px #21004c}.float{position:absolute;padding:12px 15px;border:1px solid #7f6bb2;background:#17142dd9;backdrop-filter:blur(10px);border-radius:15px;box-shadow:0 12px 35px #0007;font-size:13px}.float.one{left:0;top:18%}.float.two{right:0;bottom:18%}.float b{display:block;font-size:16px}
+.features{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;padding:25px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.feature{text-align:center;padding:10px}.feature i{font-style:normal;font-size:30px;display:block;margin-bottom:9px}.feature strong{display:block;font-size:15px}.feature small{color:var(--muted)}
+section{padding:55px 0}.section-head{display:flex;justify-content:space-between;align-items:end;gap:15px;margin-bottom:23px}h2{font-size:29px;margin:0 0 7px;letter-spacing:-.7px}.sub{color:var(--muted);margin:0;font-size:14px}
+.gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.tile{height:190px;border-radius:16px;border:1px solid #37365c;overflow:hidden;position:relative;display:flex;align-items:end;padding:14px;font-weight:750;background:linear-gradient(145deg,#124f72,#60b4d2 45%,#19314e)}.tile:nth-child(2){background:linear-gradient(145deg,#35145f,#bb66d9 50%,#f3adcb)}.tile:nth-child(3){background:linear-gradient(145deg,#45210e,#dc8d36 48%,#281a16)}.tile:nth-child(4){background:linear-gradient(145deg,#192b6a,#9262d8 55%,#f3a9bb)}.tile:nth-child(5){background:linear-gradient(145deg,#174e3c,#8acb79 55%,#e0c78b)}.tile:nth-child(6){background:linear-gradient(145deg,#124d66,#f0a45f 60%,#40234c)}.tile:nth-child(7){background:linear-gradient(145deg,#1d214c,#9a67b8 55%,#f6d4a5)}.tile:nth-child(8){background:linear-gradient(145deg,#45341f,#d9b56e 55%,#3a4d43)}.tile:before{content:"";position:absolute;inset:0;background:linear-gradient(transparent 45%,#060716b8)}.tile span{position:relative}
+.pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.price-card{background:linear-gradient(160deg,#1a1e39,#101326);border:1px solid #34385e;border-radius:20px;padding:25px;position:relative}.price-card.popular{border-color:#a75aff;box-shadow:0 0 30px #852bff25}.tag{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:#ffc52e;color:#201300;border-radius:30px;padding:5px 13px;font-size:11px;font-weight:900;white-space:nowrap}.price-card h3{margin:0 0 8px}.price{font-size:34px;font-weight:900;margin:14px 0}.price small{font-size:13px;color:var(--muted);font-weight:500}.price-card ul{padding-left:18px;color:#d4d2e7;line-height:2;font-size:14px}.price-card .btn{width:100%;margin-top:8px}
+.payment{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:24px;border:1px solid var(--line);border-radius:18px;background:#11152a}.paylogos{display:flex;gap:12px;flex-wrap:wrap}.paychip{background:#202542;border:1px solid #45496d;padding:10px 15px;border-radius:10px;font-weight:800}
+footer{border-top:1px solid var(--line);padding:25px 0;color:var(--muted);font-size:13px}.foot{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
+.notice{display:none;margin:15px 0 0;padding:12px 14px;border-radius:12px;background:#302044;border:1px solid #8954b6;color:#f0ddff;font-size:13px}
+@media(max-width:850px){.links{display:none}.menu{display:block}.hero{grid-template-columns:1fr;padding-top:45px}.art{min-height:290px}.features{grid-template-columns:repeat(2,1fr)}.gallery{grid-template-columns:repeat(2,1fr)}.tile{height:155px}.pricing{grid-template-columns:1fr}.payment{align-items:flex-start;flex-direction:column}}
+@media(max-width:520px){.nav{height:66px}.brand{font-size:18px}.brand small{font-size:10px}.nav>.btn{padding:10px 13px;font-size:12px}.hero{padding-top:35px}h1{letter-spacing:-1.8px}.lead{font-size:17px}.promptbox{flex-direction:column}.promptbox input{padding:12px}.promptbox .btn{width:100%}.float.one{left:-4px}.float.two{right:-4px}.section-head{align-items:flex-start;flex-direction:column}}
+</style>
+</head>
+<body>
+<header><div class="wrap nav">
+ <a class="brand" href="#"><span class="logo">✦</span><span>AI Image Studio<small>Imagine • Create • Download</small></span></a>
+ <nav class="links"><a href="#home">Home</a><a href="#gallery">Gallery</a><a href="#pricing">Pricing</a><a href="#account">My Account</a><a href="#contact">Contact</a></nav>
+ <a class="btn" href="#account">Login / Sign Up</a><button class="menu btn secondary" onclick="document.querySelector('.links').style.display='flex'">☰</button>
+</div></header>
+<main>
+<div class="wrap hero" id="home">
+ <div><div class="pill">✦ Free to try • Easy to use</div>
+  <h1>AI Image <span>Generator</span></h1>
+  <p class="lead">Turn your ideas into stunning images with the power of AI.</p>
+  <form class="promptbox" id="promptForm"><input id="prompt" required maxlength="500" placeholder="Describe the image you want to create..." aria-label="Image description"><button class="btn" type="submit">✦ Generate Image</button></form>
+  <p class="hint">⚡ Write your idea in a few words to get started.</p>
+  <div class="notice" id="notice">This is the website preview. Connect an AI image-generation API to create real images.</div>
+ </div>
+ <div class="art"><div class="orb"></div><div class="float one">✨ Creative tools<b>Made simple</b></div><div class="float two">🖼️ Your ideas<b>Become art</b></div></div>
+</div>
+<div class="wrap features">
+ <div class="feature"><i>⚡</i><strong>Fast Creation</strong><small>Simple creative workflow</small></div>
+ <div class="feature"><i>💎</i><strong>Great Quality</strong><small>AI-powered artwork</small></div>
+ <div class="feature"><i>📱</i><strong>All Devices</strong><small>Mobile and desktop</small></div>
+ <div class="feature"><i>🔒</i><strong>Secure Experience</strong><small>Privacy-conscious design</small></div>
+</div>
+<section class="wrap" id="gallery"><div class="section-head"><div><h2>Explore Creations</h2><p class="sub">A few style ideas to inspire your next prompt.</p></div><a class="btn secondary" href="#home">Create yours →</a></div>
+ <div class="gallery"><div class="tile"><span>Mountain Dreams</span></div><div class="tile"><span>Fantasy Portrait</span></div><div class="tile"><span>Wildlife Art</span></div><div class="tile"><span>Magic Kingdom</span></div><div class="tile"><span>Green Paradise</span></div><div class="tile"><span>Golden Sunset</span></div><div class="tile"><span>Dream World</span></div><div class="tile"><span>Nature Story</span></div></div>
+</section>
+<section class="wrap" id="pricing"><div class="section-head"><div><h2>Simple Pricing</h2><p class="sub">Example packages — configure final prices before launch.</p></div></div>
+ <div class="pricing">
+  <article class="price-card"><h3>Starter</h3><p class="sub">For trying it out</p><div class="price">Rs. 50 <small>/ 1 image</small></div><ul><li>1 image credit</li><li>Standard generation</li><li>Download image</li></ul><button class="btn" onclick="paymentInfo('Starter — Rs. 50')">Choose Starter</button></article>
+  <article class="price-card popular"><span class="tag">MOST POPULAR</span><h3>Creator</h3><p class="sub">For regular creators</p><div class="price">Rs. 200 <small>/ 5 images</small></div><ul><li>5 image credits</li><li>Standard generation</li><li>Download images</li></ul><button class="btn" onclick="paymentInfo('Creator — Rs. 200')">Choose Creator</button></article>
+  <article class="price-card"><h3>Pro</h3><p class="sub">For bigger ideas</p><div class="price">Rs. 500 <small>/ 20 images</small></div><ul><li>20 image credits</li><li>Standard generation</li><li>Download images</li></ul><button class="btn" onclick="paymentInfo('Pro — Rs. 500')">Choose Pro</button></article>
+ </div><div class="notice" id="payNotice">Payment setup is not connected yet. Add an approved JazzCash/Easypaisa merchant checkout before accepting customer payments.</div>
+</section>
+<section class="wrap" id="account"><div class="payment"><div><h2>Ready to create?</h2><p class="sub">Account registration and customer credits can be added in the next setup step.</p></div><a class="btn" href="#home">Start Creating Now →</a></div></section>
+<section class="wrap" id="contact"><div class="payment"><div><h2>Payment options</h2><p class="sub">JazzCash and Easypaisa can be added after merchant onboarding and payment verification setup.</p></div><div class="paylogos"><span class="paychip">JazzCash</span><span class="paychip">easypaisa</span></div></div></section>
+</main>
+<footer><div class="wrap foot"><span>© 2026 AI Image Studio. All rights reserved.</span><span>Imagine • Create • Download</span></div></footer>
+<script>
+document.getElementById('promptForm').addEventListener('submit',function(e){e.preventDefault();document.getElementById('notice').style.display='block';document.getElementById('notice').scrollIntoView({behavior:'smooth',block:'nearest'});});
+function paymentInfo(plan){const n=document.getElementById('payNotice');n.textContent='Selected: '+plan+'. Checkout is a demo only; connect an approved merchant payment gateway before collecting money.';n.style.display='block';n.scrollIntoView({behavior:'smooth',block:'nearest'});}
+</script>
+</body></html>
